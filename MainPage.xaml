@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EventManagementApp.MainPage"
+             xmlns:local="clr-namespace:EventManagementApp"
+             Title="Event Management">
+
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Text="Event Management" FontSize="24" HorizontalOptions="Center" />
+
+            <Button Text="Add Event" Command="{Binding AddEventCommand}" />
+
+            <ListView ItemsSource="{Binding Events}"
+                      SelectedItem="{Binding SelectedEvent}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="{Binding Name}" FontSize="18" />
+                                <Label Text="{Binding Location}" FontSize="14" />
+                                <Label Text="{Binding Date}" FontSize="14" />
+                                <Button Text="View Details" Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.ViewEventDetailsCommand}" CommandParameter="{Binding .}" />
+                                <Button Text="Edit" Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.EditEventCommand}" CommandParameter="{Binding .}" />
+                                <Button Text="Delete" Command="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.DeleteEventCommand}" CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
